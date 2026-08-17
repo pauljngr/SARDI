@@ -3,6 +3,8 @@
 Official code for [**Self-Augmenting Retrieval for Diffusion Language Models**](https://arxiv.org/abs/2606.06474),
 by Paul Jünger, Justin Lovelace, Linxi Zhao, Dongyoung Go, Kilian Q. Weinberger.
 
+[Paper](https://arxiv.org/abs/2606.06474) · [🤗 Model](https://huggingface.co/pauljngr/sardi-dream-7b) · [🤗 Data](https://huggingface.co/datasets/pauljngr/sardi-data)
+
 ![Retrieval interleaved with denoising: at each diffusion state, a query built
 from the partially denoised sequence retrieves fresh context from the corpus,
 which conditions the next denoising step.](docs/retrieve_during_denoising.png)
@@ -30,14 +32,14 @@ For inference, you need an NVIDIA GPU with **~18 GB of VRAM**. Loading HotpotQA'
 
 ## Assets
 
-As discussed in the paper, Dream-7B didn't reliably produce zero-shot reasoning traces out-of-the-box. We therefore provide a simple RAG-fine-tuned Dream-7B checkpoint, shipped with code for threshold-based decoding.
+As discussed in the paper, Dream-7B didn't reliably produce zero-shot reasoning traces out-of-the-box. We therefore provide a simple [RAG-fine-tuned Dream-7B checkpoint](https://huggingface.co/pauljngr/sardi-dream-7b), shipped with code for threshold-based decoding.
 
 ```bash
 hf download pauljngr/sardi-dream-7b --local-dir checkpoints/sardi-dream-7b
 ```
 
 Additionally, we provide our dataset splits and exact retrieval corpora (~3 GB).
-These are reformatted versions of public benchmarks (check HF dataset card for licenses):
+These are reformatted versions of public benchmarks (check [dataset card](https://huggingface.co/datasets/pauljngr/sardi-data) for licenses):
 
 ```bash
 hf download pauljngr/sardi-data --repo-type dataset --local-dir data
