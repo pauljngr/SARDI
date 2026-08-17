@@ -26,11 +26,11 @@ pip install -e .
 pip install flash-attn==2.8.3 --no-build-isolation
 ```
 
-For inference, you need an NVIDIA GPU with **~18 GB of VRAM**. To load HotpotQA's BM25 index, you need at least 32 GB of CPU RAM.
+For inference, you need an NVIDIA GPU with **~18 GB of VRAM**. Loading HotpotQA's BM25 index peaks at **~21 GB** of CPU RAM (5.2M passages). The other four datasets need far less.
 
 ## Assets
 
-As discussed in the paper, Dream-7B didn't reliably produce zero-shot reasoning traces out-of-the-box. We therefore provide a simple RAG-fine-tuned Dream-7B checkpoint, shipped with code for threshold-based decoding. 
+As discussed in the paper, Dream-7B didn't reliably produce zero-shot reasoning traces out-of-the-box. We therefore provide a simple RAG-fine-tuned Dream-7B checkpoint, shipped with code for threshold-based decoding.
 
 ```bash
 hf download pauljngr/sardi-dream-7b --local-dir checkpoints/sardi-dream-7b
@@ -52,7 +52,7 @@ data/<dataset>/corpus/index_chunked/    BM25 index, ships its own corpus.jsonl
 ```
 
 for `<dataset>` in `2wikimultihopqa`, `hotpotqa`, `musique`, `cofca`, and
-`synthworlds/sm`. 
+`synthworlds/sm`.
 
 ## Usage
 
@@ -110,7 +110,7 @@ configuration.
 | Flag | Paper | Meaning |
 |---|---|---|
 | `--threshold` | τ_c | Confidence needed to commit a token |
-| `--rag_query_confidence_threshold` | τ_q | Confidence needed before a masked position joins the query (0 = expose everything, the default and best-performing setting) |
+| `--rag_query_confidence_threshold` | τ_q | How confident the model must be about a not-yet-committed token before its guess is used in the retrieval query |
 | `--retrieve_top_k` | K | Passages retrieved per step (7) |
 | `--retrieval_steps 0,s` | — | Refresh retrieval at every denoising step |
 | `--rag_query_type question_reasoning` | — | Query = question + proxy response (SARDI) |
@@ -120,9 +120,9 @@ configuration.
 
 ## What we changed in Dream's sampler
 
-Dream loads its decoding code via `trust_remote_code`, so the threshold-based sampling code ships inside the checkpoint: It lives in
+Dream loads its decoding code via `trust_remote_code`, so the threshold-based sampling code ships inside the checkpoint, in
 `checkpoints/sardi-dream-7b/generation_utils.py`. Particularly, we added **`alg="confidence_threshold"`**, which commits every masked position whose
-  confidence clears τ_c, instead of a fixed number of tokens per step.
+confidence clears τ_c, instead of a fixed number of tokens per step.
 
 ## Citation
 
