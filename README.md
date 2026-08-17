@@ -26,7 +26,7 @@ pip install -e .
 pip install flash-attn==2.8.3 --no-build-isolation
 ```
 
-For inference, you need a CUDA GPU with **~18 GB of VRAM**. To load HotpotQA's BM25 index, you need 32 GB of CPU RAM.
+For inference, you need an NVIDIA GPU with **~18 GB of VRAM**. To load HotpotQA's BM25 index, you need at least 32 GB of CPU RAM.
 
 ## Assets
 
