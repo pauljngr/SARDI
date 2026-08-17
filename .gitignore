@@ -1,0 +1,50 @@
+checkpoints
+checkpoints/
+data
+data/
+
+# Run outputs.
+results/*
+results_*/
+*.metrics.json
+.determinism/
+.smoke/
+
+# Tooling
+.hf/
+.slurm/
+scripts/verify_retriever.py
+scripts/check_determinism.sh
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Secrets and local environment
+.env
+.env.*
+*.pem
+*.key
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs and scratch
+*.log
+nohup.out
+slurm-*.out
+Self_Augmenting_Retrieval_for_Diffusion_Language_Models.pdf
