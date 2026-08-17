@@ -104,7 +104,7 @@ class Dream7BAdapter(BaseModelAdapter):
             config=config,
             trust_remote_code=True,
             attn_implementation="flash_attention_2",
-            torch_dtype=dtype,
+            dtype=dtype,
             device_map={"": device},
         )
         print("[Model] Loaded.")
