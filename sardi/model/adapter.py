@@ -55,8 +55,7 @@ def _require_flash_attn() -> None:
             "flash-attn is required to reproduce the paper's numbers, and is not "
             "installed (or failed to import).\n"
             "  pip install flash-attn --no-build-isolation\n"
-            "See the README section 'Install' — the build takes a while and needs "
-            "a CUDA toolchain matching your torch build."
+            "See the README section 'Install'."
         ) from e
 
 
